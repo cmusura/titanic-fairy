@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "titanic-fairy"
+version = "0.1.0"
+description = ""
+authors = ["Cristobal Valenzuela Musura <cristobal.valenzuelamusura@cencosud.cl>"]
+readme = "README.md"
+packages = [{include = "titanic_fairy"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
