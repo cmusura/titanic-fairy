@@ -4,47 +4,40 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 import pandas as pd
-from titanic_fairy.enums.titanic_fields import Fields, Preprocess
+from titanic_fairy.enums.titanic_fields import Fields, Preprocess, Model_Fields
+
+# Importamos la grilla de hiperparametors a revisar
+param_grid_ = Model_Fields.Param_Grid.value
 
 
-param_grid = {"n_estimators": [10, 100, 200, 500], "max_depth": [None, 5, 10],
-             "min_samples_split": [2,3,4]}
+def build_model(X: pd.DataFrame, y: pd.Series):
+    """Arma un Pipeline que dara como output el modelo de clasificacion
 
-def build_model(X: pd.DataFrame, y):
+    El Pipeline consiste en el escalamiento de las variables seguido de 
+    ajustar un RandomForest con sus hiperparametros ajustados segun un GridSearch
+
+    :param X: DataFrame con los datos de entrenamiento 
+    :type X: pd.DataFrame
+    :param y: Serie de pandas con el valor target
+    :type y: pd.Series
+    :return: Modelo de clasificacion de sklearn
+    """
     Titanic_Random_Forest = Pipeline(
         [
             ("scaler", StandardScaler()),
             (
                 "rf_grid_search",
                 GridSearchCV(
-                    RandomForestClassifier(), param_grid, cv=3, scoring="accuracy", return_train_score=True
+                    RandomForestClassifier(),
+                    param_grid_,
+                    cv=3,
+                    scoring="accuracy",
+                    return_train_score=True,
                 ),
             ),
         ]
     )
-    
-    Titanic_Random_Forest.fit(X,y)
-    
+
+    Titanic_Random_Forest.fit(X, y)
+
     return Titanic_Random_Forest
-
-
-# X = strat_train_set.drop(["Survived"], axis=1)
-# y = strat_train_set["Survived"]
-
-# scaler = StandardScaler()
-# X_data = scaler.fit_transform(X)
-# y_data = y.to_numpy()
-
-
-# clf = RandomForestClassifier()
-
-# param_grid = {
-#     "n_estimators": [10, 100, 200, 500],
-#     "max_depth": [None, 5, 10],
-#     "min_samples_split": [2, 3, 4],
-# }
-
-# grid_search = GridSearchCV(
-#     clf, param_grid, cv=3, scoring="accuracy", return_train_score=True
-# )
-# grid_search.fit(X_data, y_data)

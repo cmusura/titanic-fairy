@@ -51,3 +51,13 @@ class Preprocess(Enum):
         Fields.Pclass.value,
         Fields.Sex.value,
     ]
+
+
+class Model_Fields(Enum):
+    """Contiene hiperparametros de el modelo"""
+
+    Param_Grid = {
+        "n_estimators": [10, 100, 200, 500],
+        "max_depth": [None, 5, 10],
+        "min_samples_split": [2, 3, 4],
+    }
