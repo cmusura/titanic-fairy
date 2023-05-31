@@ -44,3 +44,5 @@ class Preprocess(Enum):
         Fields.Ticket.value,
         Fields.Cabin.value,
     ] + [Fields.Embarked.value, Fields.Sex.value]
+
+    Train_Test_Criteria = [Fields.Survived.value, Fields.Pclass.value, Fields.Sex.value,]
