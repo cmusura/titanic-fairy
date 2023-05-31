@@ -4,6 +4,11 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 import pandas as pd
+from titanic_fairy.enums.titanic_fields import Fields, Preprocess
+
+
+param_grid = {"n_estimators": [10, 100, 200, 500], "max_depth": [None, 5, 10],
+             "min_samples_split": [2,3,4]}
 
 def build_model(X: pd.DataFrame, y):
     Titanic_Random_Forest = Pipeline(
@@ -12,7 +17,7 @@ def build_model(X: pd.DataFrame, y):
             (
                 "rf_grid_search",
                 GridSearchCV(
-                    clf, param_grid, cv=3, scoring="accuracy", return_train_score=True
+                    RandomForestClassifier(), param_grid, cv=3, scoring="accuracy", return_train_score=True
                 ),
             ),
         ]
@@ -20,7 +25,7 @@ def build_model(X: pd.DataFrame, y):
     
     Titanic_Random_Forest.fit(X,y)
     
-    return Titanic_Random_Forest.best_estimator_
+    return Titanic_Random_Forest
 
 
 # X = strat_train_set.drop(["Survived"], axis=1)
