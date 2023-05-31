@@ -1,9 +1,11 @@
 
+"""Modulo para entrenar y exportar un modelo de clasificacion para el problema de Titanic"""
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.preprocessing import StandardScaler
 
 
 split = StratifiedShuffleSplit(n_splits = 1, test_size=0.2)
