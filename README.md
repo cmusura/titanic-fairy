@@ -20,7 +20,7 @@ Una vez dentro de el ambiente virtual la libreria se puede usar dentro de python
 Para utilizarlo dentro de Python esta el ejemplo en la carpeta de notebooks del repositorio, pero 
 de todos modos el pipeline esperado de la libreria se ve como
 
-```
+```python 
 from titanic_fairy.helpers.load_and_save import Load
 from titanic_fairy.helpers.train_test_split import stratified_split
 from titanic_fairy.metrics.graphics import show_heatmap, check_train_test_split
