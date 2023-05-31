@@ -3,7 +3,7 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
-from titanic_fairy.enums.titanic_fields import Fields
+from titanic_fairy.enums.titanic_fields import Fields, Preprocess
 
 
 def show_heatmap(df: pd.DataFrame, path: str = None, save=False):
@@ -25,18 +25,28 @@ def show_heatmap(df: pd.DataFrame, path: str = None, save=False):
 
 
 def check_train_test_split(train_set: pd.DataFrame, test_set: pd.DataFrame):
+    """Grafico para corroborar que la separacion sea balanceada 
+
+    Las features que definen el balance estan dadas en la clase enum Preprocess.Train_Test_Criteria
+
+    :param train_set: Datos de entrenamiento
+    :type train_set: pd.DataFrame
+    :param test_set: Datos de validacion
+    :type test_set: pd.DataFrame
+    """
     plt.figure(figsize=(10, 5))
 
     plt.subplot(1, 2, 1)
     plt.title("Train")
-    train_set[Fields.Survived.value].hist(label=Fields.Survived.value)
-    train_set[Fields.Pclass.value].hist(label=Fields.Pclass.value)
+
+    for feature in Preprocess.Train_Test_Criteria.value: 
+        train_set[feature].hist(label=feature)
     plt.legend()
 
     plt.subplot(1, 2, 2)
     plt.title("Validation")
-    test_set[Fields.Survived.value].hist(label=Fields.Survived.value)
-    test_set[Fields.Pclass.value].hist(label=Fields.Pclass.value)
+    for feature in Preprocess.Train_Test_Criteria.value: 
+        test_set[feature].hist(label=feature)
     plt.legend()
 
     plt.show()

@@ -45,4 +45,5 @@ class Preprocess(Enum):
         Fields.Cabin.value,
     ] + [Fields.Embarked.value, Fields.Sex.value]
 
+    #Criterios en base a los cuales realizar la separacion estratificada
     Train_Test_Criteria = [Fields.Survived.value, Fields.Pclass.value, Fields.Sex.value,]
