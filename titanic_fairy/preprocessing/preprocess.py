@@ -9,13 +9,17 @@ from titanic_fairy.preprocessing.imputer import Imputer
 
 class Preprocess(BaseEstimator, TransformerMixin):
     """Wrapper que realiza los pasos del preprocesamiento en el orden adecuado"""
+
     def fit(self, X, y=None):
         return self
 
     def transform(self, X):
-        preprocesseser = Pipeline([("imputer", Imputer()),
-                    ("featureencoder", FeatureEncoder()),
-                    ("featuredropper", FeatureDropper())])
+        preprocesseser = Pipeline(
+            [
+                ("imputer", Imputer()),
+                ("featureencoder", FeatureEncoder()),
+                ("featuredropper", FeatureDropper()),
+            ]
+        )
         X = preprocesseser.fit_transform(X)
         return X
-

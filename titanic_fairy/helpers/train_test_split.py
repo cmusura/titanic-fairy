@@ -9,9 +9,10 @@ from sklearn.model_selection import StratifiedShuffleSplit
 from titanic_fairy.enums.titanic_fields import Fields, Preprocess
 import pandas as pd
 
-def stratified_split(df : pd.DataFrame, n_splits = 1, test_size = 0.2):
+
+def stratified_split(df: pd.DataFrame, n_splits=1, test_size=0.2):
     """Realiza la separacion estratificada de los datos de entrenamiento.
-    
+
     La estratificacion mantiene las clases balanceadas. El criterio de balanceo esta definido en el modulo Enum.
 
     """
@@ -21,4 +22,5 @@ def stratified_split(df : pd.DataFrame, n_splits = 1, test_size = 0.2):
     ):
         train_set = df.loc[train_indices]
         test_set = df.loc[test_indices]
+
     return train_set, test_set

@@ -1,9 +1,26 @@
-# """Modulo para entrenar y exportar un modelo de clasificacion para el problema de Titanic"""
-# from sklearn.ensemble import RandomForestClassifier
-# from sklearn.model_selection import GridSearchCV
-# from sklearn.pipeline import Pipeline
-# from sklearn.base import BaseEstimator, TransformerMixin
-# from sklearn.preprocessing import StandardScaler
+"""Modulo para entrenar y exportar un modelo de clasificacion para el problema de Titanic"""
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+import pandas as pd
+
+def build_model(X: pd.DataFrame, y):
+    Titanic_Random_Forest = Pipeline(
+        [
+            ("scaler", StandardScaler()),
+            (
+                "rf_grid_search",
+                GridSearchCV(
+                    clf, param_grid, cv=3, scoring="accuracy", return_train_score=True
+                ),
+            ),
+        ]
+    )
+    
+    Titanic_Random_Forest.fit(X,y)
+    
+    return Titanic_Random_Forest.best_estimator_
 
 
 # X = strat_train_set.drop(["Survived"], axis=1)
