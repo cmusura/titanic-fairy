@@ -1,39 +1,25 @@
 """Modulo para imputar valores faltantes en los datos"""
 
-from titanic_fairy.enums.titanic_fields import Fields
+from titanic_fairy.enums.titanic_fields import Fields, Preprocess
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.impute import SimpleImputer
 
 
-class AgeImputer(BaseEstimator, TransformerMixin):
-    """Imputacion de Edad en base a el promedio de edad"""
-    def fit(self, X, y=None):
-        return self
+class Imputer(BaseEstimator, TransformerMixin):
+    """Imputacion de datos faltantes en base a distintas estrategias (moda y promedio)
 
-    def transform(self, X):
-        imputer = SimpleImputer(strategy="mean")
-        X[Fields.Age] = imputer.fit_transform(X[[Fields.Age]])
-        return X
+    Las estrategias y los features considerados en cada caso se encuentran en el modulo Enum.
 
-
-class CabinImputer(BaseEstimator, TransformerMixin):
-    """Imputacion de numero de cabina en base a valor mas frecuente"""
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-        imputer = SimpleImputer(strategy="most_frequent")
-        X[Fields.Cabin] = imputer.fit_transform(X[[Fields.Cabin]])
-        return X
-
-
-class EmbarkedImputer(BaseEstimator, TransformerMixin):
-    """Imputacion de puerto de embarcacion en base a valor mas frecuente"""
+    """
 
     def fit(self, X, y=None):
         return self
 
     def transform(self, X):
-        imputer = SimpleImputer(strategy="most_frequent")
-        X[Fields.Embarked] = imputer.fit_transform(X[[Fields.Embarked]])
+        # Sacamos las instrucciones del modulo enum
+        # Cada feature considerado tiene una estrategia de imputacion
+        instruct = Preprocess.Impute.value
+        for feature in instruct.keys():
+            imputer = SimpleImputer(strategy=instruct[feature])
+            X[feature] = imputer.fit_transform(X[[feature]]).flatten()
         return X
