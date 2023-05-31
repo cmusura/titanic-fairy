@@ -13,6 +13,7 @@ pandas = "^2.0.2"
 sklearn = "^0.0.post5"
 matplotlib = "^3.7.1"
 typer = "^0.9.0"
+scikit-learn = "^1.2.2"
 
 
 [build-system]
