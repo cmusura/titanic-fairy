@@ -22,6 +22,7 @@ def build_model(X: pd.DataFrame, y: pd.Series):
     :type y: pd.Series
     :return: Modelo de clasificacion de sklearn
     """
+    #Definimos el pipeline
     Titanic_Random_Forest = Pipeline(
         [
             ("scaler", StandardScaler()),
@@ -38,6 +39,7 @@ def build_model(X: pd.DataFrame, y: pd.Series):
         ]
     )
 
+    #Ajustamos el modelo
     Titanic_Random_Forest.fit(X, y)
 
     return Titanic_Random_Forest
