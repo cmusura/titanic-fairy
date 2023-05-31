@@ -1,4 +1,4 @@
-"""Testeamos que las nombres de los datos son los correctos"""
+"""Test de que nombres de las columnas son los correctos"""
 import pytest
 import pandas as pd
 import os
