@@ -17,8 +17,7 @@ poetry shell
 
 Una vez dentro de el ambiente virtual la libreria se puede usar dentro de python o usando el CLI. 
 
-Para utilizarlo dentro de Python esta el ejemplo en la carpeta de notebooks del repositorio, pero 
-de todos modos el pipeline esperado de la libreria se ve como
+Para utilizarlo en Python el script esperado se veria de este modo
 
 ```python 
 from titanic_fairy.helpers.load_and_save import Load
@@ -54,3 +53,4 @@ model = build_model(X_train, y_train)
 model.predict(X_test)
 ```
 
+Mayores detalles se encuentran en el notebook disponible en el repositorio.
