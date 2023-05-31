@@ -8,6 +8,8 @@ packages = [{include = "titanic_fairy"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+pytest = "^7.3.1"
+pandas = "^2.0.2"
 
 
 [build-system]
