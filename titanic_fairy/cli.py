@@ -109,21 +109,43 @@ def make_predictions(
     input_path: Path = TRAIN_PATH_OPTION,
     test_path: Path = TEST_PATH_OPTION,
     output_path: Path = PREDICTIONS_PATH_OPTION,
-    build_model: bool = True,
+    build_model_flag: bool = True,
 ):
     """
     Toma o entrena un modelo (dependiendo del flag build_model) y realiza las predicciones correspondientes
     y las entrega como resultados en la ruta indicada
 
-    :return: _description_
-    :rtype: _type_
     """
+    if build_model_flag:
+        df = pd.read_csv(input_path)
+        preproc = Preprocess().fit_transform(df)
+        X = preproc.drop([Fields.Survived.value], axis=1)
+        y = preproc[Fields.Survived.value]
+        model = build_model(X, y)
+    else:
+        try:
+            model = joblib.load(MODEL_PATH_OPTION)
+        except ModuleNotFoundError:
+            typer.echo(
+                "Si build_model_flag es False, se debe entregar una ruta a un modelo en formato joblib."
+            )
 
-    df = pd.read_csv(input_path)
-    preproc = Preprocess().fit_transform(df)
-    X = preproc.drop([Fields.Survived.value], axis=1)
-    y = preproc[Fields.Survived.value]
-    model = build_model(X, y)
-    joblib.dump(model, output_path)
+    # Leemos los datos test
+    test = pd.read_csv(test_path)
+
+    # Guardamos los ID de los pasajeros a predecir
+    passenger_id = test[Fields.ID.value]
+
+    # Aplicamos el pipeline
+    test = Preprocess().fit_transform(test)
+    results = model.predict(test)
+
+    # Formateamos y guardamos los resultados
+    output = pd.DataFrame(
+        {Fields.ID.value: passenger_id, Fields.Survived.value: results}
+    )
+
+    output.to_csv(output_path)
+
     typer.echo("Done.")
     return None

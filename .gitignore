@@ -2,3 +2,4 @@ titanic_fairy/__pycache__/cli.cpython-38.pyc
 Dockerfile
 titanic_fairy/model/__pycache__/train_model.cpython-38.pyc
 results/model/titanic_model.joblib'=
+results/predictions.csv
