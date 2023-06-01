@@ -6,3 +6,4 @@ ENV PYTHONPATH=${PYTHONPATH}:${PWD}
 RUN pip install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-ansi
+#To-Do run tests
