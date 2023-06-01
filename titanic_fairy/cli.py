@@ -7,6 +7,11 @@ import pandas as pd
 from titanic_fairy.helpers.check_data import check_table_
 from titanic_fairy.enums.titanic_fields import Fields, Preprocess_
 from titanic_fairy.preprocessing.preprocess import Preprocess
+from titanic_fairy.model.train_model import build_model
+import joblib
+
+
+
 
 # # from execslotting import logger
 
@@ -22,15 +27,22 @@ TRAIN_PATH_OPTION = typer.Option(
     help="Ruta al archivo de datos para ser ingestado por el modelo",
 )
 
-INPUT_PREPROCESS_PATH_OPTION = typer.Option(
-    str(Path("dataset/train.csv")),
-    help="Ruta al archivo de datos para ser ingestado por el modelo",
-)
-
-OUTPUT_PREPROCESS_PATH_OPTION = typer.Option(
+PREPROCESS_PATH_OPTION = typer.Option(
     str(Path("dataset/preprocess.csv")),
     help="Ruta al archivo de datos para ser ingestado por el modelo",
 )
+
+MODEL_PATH_OPTION = typer.Option(
+    str(Path("results/model/titanic_model.joblib'=")),
+    help="Ruta al archivo de datos para ser ingestado por el modelo",
+)
+
+IMGS_PATH_OPTION = typer.Option(
+    str(Path("results/imgs")),
+    help="Ruta al archivo de datos para ser ingestado por el modelo",
+)
+
+
 
 
 @app.command()
@@ -43,12 +55,13 @@ def check_table(path: Path = TRAIN_PATH_OPTION):
     check = check_table_(path)
     if check:
         typer.echo("La tabla esta lsita para procesarse.")
+    return None
 
 
 @app.command()
 def preprocess_table(
-    input_path: Path = TRAIN_PATH_OPTION,
-    output_path: Path = TRAIN_PATH_OPTION,
+    input_path: Path = TRAIN_PATH_OPTION ,
+    output_path: Path = PREPROCESS_PATH_OPTION,
 ):
     """
     Preprocesa los datos en input_path y guarda los datos preprocesados en output_path
@@ -60,11 +73,34 @@ def preprocess_table(
     """
 
     df = pd.read_csv(input_path)
-    typer.echo(len(df))
     preproc = Preprocess().fit_transform(df)
     preproc.to_csv(output_path)
     typer.echo("Done.")
     return None
+
+@app.command()
+def train_model(input_path: Path = TRAIN_PATH_OPTION ,
+                output_path: Path = MODEL_PATH_OPTION):
+    
+    """
+    Realiza el pipeline completo, desde preprocesamiento 
+    a salida de un modelo. El modelo queda en formato joblib en la ruta output_path
+    """
+
+    df = pd.read_csv(input_path)
+    preproc = Preprocess().fit_transform(df)
+    X = preproc.drop([Fields.Survived.value], axis=1)
+    y = preproc[Fields.Survived.value]
+    model = build_model(X, y)
+    joblib.dump(model, output_path)
+    typer.echo("Done.")
+    return None
+
+
+
+
+
+
 
 
 # def main():
