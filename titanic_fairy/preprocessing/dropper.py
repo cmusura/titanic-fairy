@@ -1,6 +1,6 @@
 """Modulo para desechar columnas que no seran usadas en le modelo."""
 from sklearn.base import BaseEstimator, TransformerMixin
-from titanic_fairy.enums.titanic_fields import Fields, Preprocess
+from titanic_fairy.enums.titanic_fields import Fields, Preprocess_
 
 
 class FeatureDropper(BaseEstimator, TransformerMixin):
@@ -10,5 +10,5 @@ class FeatureDropper(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X):
-        to_drop = Preprocess.Drop.value
+        to_drop = Preprocess_.Drop.value
         return X.drop(to_drop, axis=1)

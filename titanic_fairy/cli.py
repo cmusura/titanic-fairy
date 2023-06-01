@@ -5,7 +5,8 @@ from pathlib import Path
 import typer
 import pandas as pd
 from titanic_fairy.helpers.check_data import check_table_
-from titanic_fairy.enums.titanic_fields import Fields, Preprocess
+from titanic_fairy.enums.titanic_fields import Fields, Preprocess_
+from titanic_fairy.preprocessing.preprocess import Preprocess
 
 # # from execslotting import logger
 
@@ -58,9 +59,11 @@ def preprocess_table(input_path : Path = TRAIN_PATH_OPTION,
     """
 
     df = pd.read_csv(input_path)
+    typer.echo(len(df))
     preproc = Preprocess().fit_transform(df)
     preproc.to_csv(output_path)
     typer.echo("Done.")
+    return None
 
 
 

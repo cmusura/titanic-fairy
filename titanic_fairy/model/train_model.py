@@ -4,7 +4,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 import pandas as pd
-from titanic_fairy.enums.titanic_fields import Fields, Preprocess, Model_Fields
+from titanic_fairy.enums.titanic_fields import Fields, Preprocess_, Model_Fields
 
 # Importamos la grilla de hiperparametors a revisar
 param_grid_ = Model_Fields.Param_Grid.value

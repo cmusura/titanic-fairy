@@ -1,6 +1,6 @@
 """Modulo para imputar valores faltantes en los datos"""
 
-from titanic_fairy.enums.titanic_fields import Fields, Preprocess
+from titanic_fairy.enums.titanic_fields import Fields, Preprocess_
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.impute import SimpleImputer
 
@@ -18,7 +18,7 @@ class Imputer(BaseEstimator, TransformerMixin):
     def transform(self, X):
         # Sacamos las instrucciones del modulo enum
         # Cada feature considerado tiene una estrategia de imputacion
-        instruct = Preprocess.Impute.value
+        instruct = Preprocess_.Impute.value
         for feature in instruct.keys():
             imputer = SimpleImputer(strategy=instruct[feature])
             X[feature] = imputer.fit_transform(X[[feature]]).flatten()

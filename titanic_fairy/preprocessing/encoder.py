@@ -1,6 +1,5 @@
 """Modulo encargado de imputar. """
-from sklearn.base import BaseEstimator, TransformerMixin
-from titanic_fairy.enums.titanic_fields import Fields, Preprocess
+from sklearn.base import BaseEstimator, TransformerMixin_
 from sklearn.preprocessing import OneHotEncoder
 
 
@@ -19,7 +18,7 @@ class FeatureEncoder(BaseEstimator, TransformerMixin):
         encoder = OneHotEncoder()
 
         # Recuperamos las variables a codificar en Enum
-        features_to_encode = Preprocess.Encode.value
+        features_to_encode = Preprocess_.Encode.value
 
         for feature in features_to_encode:
             # Codificamos los valores

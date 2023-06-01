@@ -19,7 +19,7 @@ class Fields(Enum):
     Embarked = "Embarked"
 
 
-class Preprocess(Enum):
+class Preprocess_(Enum):
     """Variables consideradas en cada paso del procesamiento
 
     Parametros:

@@ -1,6 +1,6 @@
 """Test de imputadores de valores"""
 from titanic_fairy.preprocessing.dropper import FeatureDropper
-from titanic_fairy.enums.titanic_fields import Fields, Preprocess
+from titanic_fairy.enums.titanic_fields import Fields, Preprocess_
 import pytest
 import pandas as pd
 import numpy as np
