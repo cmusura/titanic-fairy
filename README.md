@@ -6,9 +6,12 @@ El proposito del modulo no es resolver el problema a una alta precision, si no m
 
 # Como usar
 
+
+## Instalacion 
+
 La libreria esta implementada con poetry, por lo que es necesario tener instalado poetry en tu maquina antes de usar la libreria. 
 
-Luego, una vez dentro de la carpeta principal del proyecto, se debe correr el comando:
+Luego, una vez dentro de la carpeta principal del proyecto, se debe correr sencillamente:
 
 ```
 poetry install
@@ -16,6 +19,8 @@ poetry shell
 ```
 
 Una vez dentro de el ambiente virtual la libreria se puede usar dentro de python o usando el CLI. 
+
+## Uso como libreria
 
 Para utilizarlo en Python el script esperado se veria de este modo
 
@@ -54,3 +59,35 @@ model.predict(X_test)
 ```
 
 Mayores detalles se encuentran en el notebook disponible en el repositorio.
+
+## Uso como CLI 
+
+El paquete titanic-fairy es un CLI estándar hecho con Typer.
+
+### Chequeo de tablas
+
+Se puede chequear que las tablas estan en el formato correcto usando el comando 
+
+```
+titanic-fairy check-table --path PATH_DATOS
+```
+
+Por default los archivos se encuentran en "dataset\train.csv"
+
+### Preprocesamiento
+
+Se puede usar la bateria de preprocesamiento de la libreria, obteniendo una tabla de datos preprocesados ocupando el comando 
+
+```
+titanic-fairy preprocess-table --input-path PATH_DATOS --output-path PATH_SALIDA
+```
+Ambos parametros estan definidos por default en "dataset\train.csv" y "dataset\preprocess.csv"
+
+### Entrenamiento de modelo
+
+Este comando entrena un modelo con los datos y los guarda en la ruta especificada. 
+
+```
+titanic-fairy train-model --input-path PATH_DATOS --output-path PATH_MODELO
+```
+Ambos parametros estan definidos por default en "dataset\train.csv" y "results\model\titanic_model.joblib"
