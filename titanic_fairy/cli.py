@@ -11,38 +11,44 @@ from titanic_fairy.model.train_model import build_model
 import joblib
 
 
+"""
 
-
-# # from execslotting import logger
-
-"""API interfaz de ejecución de modelo para Titanic.
+Implementacion del CLI para modelo Titanic
 
 """
 
 app = typer.Typer()
 
-
+# Definimos las opciones por defecto
 TRAIN_PATH_OPTION = typer.Option(
     str(Path("dataset/train.csv")),
     help="Ruta al archivo de datos para ser ingestado por el modelo",
 )
 
+TEST_PATH_OPTION = typer.Option(
+    str(Path("dataset/test.csv")),
+    help="Ruta al archivo de datos test para realizar la prediccion",
+)
+
 PREPROCESS_PATH_OPTION = typer.Option(
     str(Path("dataset/preprocess.csv")),
-    help="Ruta al archivo de datos para ser ingestado por el modelo",
+    help="Ruta de salida de la tabla preprocesada",
 )
 
 MODEL_PATH_OPTION = typer.Option(
     str(Path("results/model/titanic_model.joblib'=")),
-    help="Ruta al archivo de datos para ser ingestado por el modelo",
+    help="Ruta del modelo a ser entrenado/utilizado",
 )
 
 IMGS_PATH_OPTION = typer.Option(
     str(Path("results/imgs")),
-    help="Ruta al archivo de datos para ser ingestado por el modelo",
+    help="Directorio donde guardar imagenes",
 )
 
-
+PREDICTIONS_PATH_OPTION = typer.Option(
+    str(Path("results/predictions.csv")),
+    help="Ruta de salida de predicciones realizadas por el modelo",
+)
 
 
 @app.command()
@@ -60,7 +66,7 @@ def check_table(path: Path = TRAIN_PATH_OPTION):
 
 @app.command()
 def preprocess_table(
-    input_path: Path = TRAIN_PATH_OPTION ,
+    input_path: Path = TRAIN_PATH_OPTION,
     output_path: Path = PREPROCESS_PATH_OPTION,
 ):
     """
@@ -78,12 +84,13 @@ def preprocess_table(
     typer.echo("Done.")
     return None
 
+
 @app.command()
-def train_model(input_path: Path = TRAIN_PATH_OPTION ,
-                output_path: Path = MODEL_PATH_OPTION):
-    
+def train_model(
+    input_path: Path = TRAIN_PATH_OPTION, output_path: Path = MODEL_PATH_OPTION
+):
     """
-    Realiza el pipeline completo, desde preprocesamiento 
+    Realiza el pipeline completo, desde preprocesamiento
     a salida de un modelo. El modelo queda en formato joblib en la ruta output_path
     """
 
@@ -97,24 +104,26 @@ def train_model(input_path: Path = TRAIN_PATH_OPTION ,
     return None
 
 
+@app.command()
+def make_predictions(
+    input_path: Path = TRAIN_PATH_OPTION,
+    test_path: Path = TEST_PATH_OPTION,
+    output_path: Path = PREDICTIONS_PATH_OPTION,
+    build_model: bool = True,
+):
+    """
+    Toma o entrena un modelo (dependiendo del flag build_model) y realiza las predicciones correspondientes
+    y las entrega como resultados en la ruta indicada
 
+    :return: _description_
+    :rtype: _type_
+    """
 
-
-
-
-
-# def main():
-#     from titanic_fairy.helpers.check_data import APP as APP_CHECK
-
-#     APP = typer.Typer()
-#     # chequea los datos y que el path a las tablas sea el correcto
-#     APP.add_typer(APP_CHECK, name="check-tables")
-#     # preprocesa los datos y los guarda en una tabla.
-#     # APP.add_typer(APP_PREPROCESS, name="preprocess")
-#     # # entrena un modelo y lo guarda en result/model
-#     # APP.add_typer(APP_TRAIN, name="train_model")
-#     # # genera graficos
-#     # APP.add_typer(APP_PREDICT, name="make_graphs")
-#     # # predice
-#     # APP.add_typer(APP_DISTANCE, name="predict")
-#     APP()
+    df = pd.read_csv(input_path)
+    preproc = Preprocess().fit_transform(df)
+    X = preproc.drop([Fields.Survived.value], axis=1)
+    y = preproc[Fields.Survived.value]
+    model = build_model(X, y)
+    joblib.dump(model, output_path)
+    typer.echo("Done.")
+    return None
