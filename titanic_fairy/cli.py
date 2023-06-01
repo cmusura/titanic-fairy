@@ -109,6 +109,7 @@ def make_predictions(
     input_path: Path = TRAIN_PATH_OPTION,
     test_path: Path = TEST_PATH_OPTION,
     output_path: Path = PREDICTIONS_PATH_OPTION,
+    model_path: Path = MODEL_PATH_OPTION,
     build_model_flag: bool = True,
 ):
     """

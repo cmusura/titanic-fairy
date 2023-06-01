@@ -91,3 +91,13 @@ Este comando entrena un modelo con los datos y los guarda en la ruta especificad
 titanic-fairy train-model --input-path PATH_DATOS --output-path PATH_MODELO
 ```
 Ambos parametros estan definidos por default en "dataset\train.csv" y "results\model\titanic_model.joblib"
+
+### Generar predicciones 
+
+Este comando toma un modelo ya entrenado (o bien entrena uno desde 0)
+y genera predicciones a partir de un archivo de datos test especificados. 
+
+```
+titanic-fairy make-predictions --input-path PATH_DATOS --test-path TEST_PATH --output-path PATH_RESULTADOS --build-model-flag
+```
+Ambos parametros estan definidos por default en "dataset\train.csv" y "results\model\titanic_model.joblib"
