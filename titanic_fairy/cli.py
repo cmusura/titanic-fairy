@@ -3,7 +3,9 @@
 """
 from pathlib import Path
 import typer
+import pandas as pd
 from titanic_fairy.helpers.check_data import check_table_
+from titanic_fairy.enums.titanic_fields import Fields, Preprocess
 
 # # from execslotting import logger
 
@@ -16,6 +18,16 @@ app = typer.Typer()
 
 TRAIN_PATH_OPTION = typer.Option(
     str(Path("dataset/train.csv"))
+    , help="Ruta al archivo de datos para ser ingestado por el modelo"
+)
+
+INPUT_PREPROCESS_PATH_OPTION = typer.Option(
+    str(Path("dataset/train.csv"))
+    , help="Ruta al archivo de datos para ser ingestado por el modelo"
+)
+
+OUTPUT_PREPROCESS_PATH_OPTION = typer.Option(
+    str(Path("dataset/preprocess.csv"))
     , help="Ruta al archivo de datos para ser ingestado por el modelo"
 )
 
@@ -33,14 +45,22 @@ def check_table(path : Path = TRAIN_PATH_OPTION):
 
 
 @app.command()
-def shoot():
-    """Chequea que la tabla este lista apra ser procesada
+def preprocess_table(input_path : Path = TRAIN_PATH_OPTION,
+                    output_path : Path = TRAIN_PATH_OPTION,
+                     ):
+    """
+    Preprocesa los datos en input_path y guarda los datos preprocesados en output_path
 
-    :param path: Ruta al archivo, defaults to PATH_OPTION
-    :type path: Path, optional
+    :param input_path: Ruta a tabla de Titanic, defaults to TRAIN_PATH_OPTION
+    :type input_path: Path, optional
+    :param output_path: Ruta donde se desea guardar el preprocesamiento, defaults to TRAIN_PATH_OPTION
+    :type output_path: Path, optional
     """
 
-    typer.echo("pium")
+    df = pd.read_csv(input_path)
+    preproc = Preprocess().fit_transform(df)
+    preproc.to_csv(output_path)
+    typer.echo("Done.")
 
 
 
