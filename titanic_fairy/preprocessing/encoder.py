@@ -1,6 +1,7 @@
 """Modulo encargado de imputar. """
-from sklearn.base import BaseEstimator, TransformerMixin_
+from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OneHotEncoder
+from titanic_fairy.enums.titanic_fields import Fields, Preprocess_
 
 
 class FeatureEncoder(BaseEstimator, TransformerMixin):

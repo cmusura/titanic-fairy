@@ -18,22 +18,23 @@ app = typer.Typer()
 
 
 TRAIN_PATH_OPTION = typer.Option(
-    str(Path("dataset/train.csv"))
-    , help="Ruta al archivo de datos para ser ingestado por el modelo"
+    str(Path("dataset/train.csv")),
+    help="Ruta al archivo de datos para ser ingestado por el modelo",
 )
 
 INPUT_PREPROCESS_PATH_OPTION = typer.Option(
-    str(Path("dataset/train.csv"))
-    , help="Ruta al archivo de datos para ser ingestado por el modelo"
+    str(Path("dataset/train.csv")),
+    help="Ruta al archivo de datos para ser ingestado por el modelo",
 )
 
 OUTPUT_PREPROCESS_PATH_OPTION = typer.Option(
-    str(Path("dataset/preprocess.csv"))
-    , help="Ruta al archivo de datos para ser ingestado por el modelo"
+    str(Path("dataset/preprocess.csv")),
+    help="Ruta al archivo de datos para ser ingestado por el modelo",
 )
 
+
 @app.command()
-def check_table(path : Path = TRAIN_PATH_OPTION):
+def check_table(path: Path = TRAIN_PATH_OPTION):
     """Chequea que la tabla este lista apra ser procesada
 
     :param path: Ruta al archivo, defaults to PATH_OPTION
@@ -44,11 +45,11 @@ def check_table(path : Path = TRAIN_PATH_OPTION):
         typer.echo("La tabla esta lsita para procesarse.")
 
 
-
 @app.command()
-def preprocess_table(input_path : Path = TRAIN_PATH_OPTION,
-                    output_path : Path = TRAIN_PATH_OPTION,
-                     ):
+def preprocess_table(
+    input_path: Path = TRAIN_PATH_OPTION,
+    output_path: Path = TRAIN_PATH_OPTION,
+):
     """
     Preprocesa los datos en input_path y guarda los datos preprocesados en output_path
 
@@ -66,22 +67,18 @@ def preprocess_table(input_path : Path = TRAIN_PATH_OPTION,
     return None
 
 
-
-# def main(): 
+# def main():
 #     from titanic_fairy.helpers.check_data import APP as APP_CHECK
 
 #     APP = typer.Typer()
 #     # chequea los datos y que el path a las tablas sea el correcto
 #     APP.add_typer(APP_CHECK, name="check-tables")
-#     # preprocesa los datos y los guarda en una tabla. 
-#     # APP.add_typer(APP_PREPROCESS, name="preprocess") 
+#     # preprocesa los datos y los guarda en una tabla.
+#     # APP.add_typer(APP_PREPROCESS, name="preprocess")
 #     # # entrena un modelo y lo guarda en result/model
 #     # APP.add_typer(APP_TRAIN, name="train_model")
-#     # # genera graficos 
+#     # # genera graficos
 #     # APP.add_typer(APP_PREDICT, name="make_graphs")
-#     # # predice 
+#     # # predice
 #     # APP.add_typer(APP_DISTANCE, name="predict")
 #     APP()
-
-
-    
