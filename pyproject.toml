@@ -22,7 +22,7 @@ jupyter = "^1.0.0"
 
 
 [tool.poetry.scripts]
-titanic_fairy = "titanic_fairy.cli:main"
+titanic-fairy = "titanic_fairy.cli:app"
 
 [build-system]
 requires = ["poetry-core"]
