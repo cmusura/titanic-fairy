@@ -98,6 +98,6 @@ Este comando toma un modelo ya entrenado (o bien entrena uno desde 0)
 y genera predicciones a partir de un archivo de datos test especificados. 
 
 ```
-titanic-fairy make-predictions --input-path PATH_DATOS --test-path TEST_PATH --output-path PATH_RESULTADOS --build-model-flag
+titanic-fairy make-predictions --input-path PATH_DATOS --test-path TEST_PATH --output-path PATH_RESULTADOS --model-path MODEL_PATH --build-model-flag
 ```
-Ambos parametros estan definidos por default en "dataset\train.csv" y "results\model\titanic_model.joblib"
+Donde si se entrega --build-model-flag entonces construira el modelo desde 0, en caso contrario usara el entregado en MODEL_PATH
