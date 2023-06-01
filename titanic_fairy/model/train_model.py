@@ -1,4 +1,4 @@
-"""Modulo para entrenar y exportar un modelo de clasificacion para el problema de Titanic"""
+"""Modulo para entrenar y exportar un modelo de clasificacion para el problema de Titanic. """
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline

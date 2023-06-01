@@ -1,4 +1,4 @@
-"""Wrapper de todos los otros modulos de preprocesamiento y los realiza en conjunto"""
+"""Wrapper de todos los otros modulos de preprocesamiento y los realiza en conjunto."""
 
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import Pipeline

@@ -1,4 +1,4 @@
-"""Modulo para desechar columnas que no seran usadas en le modelo"""
+"""Modulo para desechar columnas que no seran usadas en le modelo."""
 from sklearn.base import BaseEstimator, TransformerMixin
 from titanic_fairy.enums.titanic_fields import Fields, Preprocess
 

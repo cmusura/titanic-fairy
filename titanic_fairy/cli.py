@@ -1,4 +1,4 @@
-"""API interfaz de ejecució
+"""API interfaz de ejecución
 
 """
 

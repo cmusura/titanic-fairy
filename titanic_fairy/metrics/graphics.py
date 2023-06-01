@@ -1,4 +1,4 @@
-"""Modulo que implementa distintos graficos de interes"""
+"""Modulo que implementa distintos graficos de interes."""
 
 import matplotlib.pyplot as plt
 import seaborn as sns

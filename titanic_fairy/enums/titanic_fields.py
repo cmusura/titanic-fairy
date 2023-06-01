@@ -1,4 +1,4 @@
-"""Modulo que guarda los nombres de la base de datos original de Titanic """
+"""Modulo que guarda los nombres de la base de datos original de Titanic. """
 from enum import Enum
 
 

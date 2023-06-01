@@ -1,4 +1,4 @@
-"""Modulo encargado de imputar """
+"""Modulo encargado de imputar. """
 from sklearn.base import BaseEstimator, TransformerMixin
 from titanic_fairy.enums.titanic_fields import Fields, Preprocess
 from sklearn.preprocessing import OneHotEncoder

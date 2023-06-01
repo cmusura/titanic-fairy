@@ -1,7 +1,7 @@
 """Modulo auxiliar para separar datos de entrenamiento y validacion
 
 Se ocupa la separacion estratificada para obtener datos de validacion balanceados y 
-no tener problemas con el sesgo de seleccion en el problema de Titanic. 
+no tener problemas con el sesgo de seleccion en el problema de Titanic
 
 """
 
