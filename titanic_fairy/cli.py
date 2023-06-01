@@ -40,11 +40,6 @@ MODEL_PATH_OPTION = typer.Option(
     help="Ruta del modelo a ser entrenado/utilizado",
 )
 
-IMGS_PATH_OPTION = typer.Option(
-    str(Path("results/imgs")),
-    help="Directorio donde guardar imagenes",
-)
-
 PREDICTIONS_PATH_OPTION = typer.Option(
     str(Path("results/predictions.csv")),
     help="Ruta de salida de predicciones realizadas por el modelo",

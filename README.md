@@ -101,3 +101,4 @@ y genera predicciones a partir de un archivo de datos test especificados.
 titanic-fairy make-predictions --input-path PATH_DATOS --test-path TEST_PATH --output-path PATH_RESULTADOS --model-path MODEL_PATH --build-model-flag
 ```
 Donde si se entrega --build-model-flag entonces construira el modelo desde 0, en caso contrario usara el entregado en MODEL_PATH
+
