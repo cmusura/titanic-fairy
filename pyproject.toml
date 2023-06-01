@@ -10,7 +10,6 @@ packages = [{include = "titanic_fairy"}]
 python = "^3.8"
 pytest = "^7.3.1"
 pandas = "^2.0.2"
-sklearn = "^0.0.post5"
 matplotlib = "^3.7.1"
 typer = "^0.9.0"
 scikit-learn = "^1.2.2"
@@ -23,7 +22,7 @@ jupyter = "^1.0.0"
 
 
 [tool.poetry.scripts]
-execslotting = "execslotting.cli:main"
+titanic_fairy = "titanic_fairy.cli:main"
 
 [build-system]
 requires = ["poetry-core"]
