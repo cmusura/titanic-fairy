@@ -14,16 +14,33 @@ from titanic_fairy.helpers.check_data import check_table_
 app = typer.Typer()
 
 
-PATH_OPTION = typer.Option(
+TRAIN_PATH_OPTION = typer.Option(
     str(Path("dataset/train.csv"))
     , help="Ruta al archivo de datos para ser ingestado por el modelo"
 )
 
 @app.command()
-def check_table(path : Path = PATH_OPTION):
+def check_table(path : Path = TRAIN_PATH_OPTION):
+    """Chequea que la tabla este lista apra ser procesada
+
+    :param path: Ruta al archivo, defaults to PATH_OPTION
+    :type path: Path, optional
+    """
     check = check_table_(path)
     if check:
         typer.echo("La tabla esta lsita para procesarse.")
+
+
+
+@app.command()
+def shoot():
+    """Chequea que la tabla este lista apra ser procesada
+
+    :param path: Ruta al archivo, defaults to PATH_OPTION
+    :type path: Path, optional
+    """
+
+    typer.echo("pium")
 
 
 

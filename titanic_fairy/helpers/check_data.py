@@ -20,7 +20,7 @@ def check_table_(data_file: Path):
     for col in df.columns:
         if col not in fields_names:
             raise ValueError("Datos poseen columna no esperada")
-        flag = False
-    return Flag
+            flag = False
+    return flag
 
 
