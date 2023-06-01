@@ -6,5 +6,5 @@ ENV PYTHONPATH=${PYTHONPATH}:${PWD}
 RUN pip3 install poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install
-EXPOSE 5002
-CMD ["poetry", "run", "app"]
+RUN poetry shell 
+RUN jupyter notebook 
